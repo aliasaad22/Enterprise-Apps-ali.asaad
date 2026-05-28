@@ -1,4 +1,4 @@
-package ali.enterprise.be.ngo_anderlecht;
+package be.ali.enterprise.ngo_anderlecht;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
