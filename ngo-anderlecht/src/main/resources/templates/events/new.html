@@ -1,0 +1,38 @@
+<div th:fragment="content">
+    <h1 class="text-3xl font-bold mb-4">Nieuw Event</h1>
+
+    <form th:action="@{/events/new}" th:object="${event}" method="post" class="bg-white p-6 rounded shadow space-y-4">
+
+        <div>
+            <label class="block font-semibold">Titel</label>
+            <input type="text" th:field="*{title}" class="border p-2 w-full">
+            <p class="text-red-600" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></p>
+        </div>
+
+        <div>
+            <label class="block font-semibold">Beschrijving</label>
+            <textarea th:field="*{description}" class="border p-2 w-full"></textarea>
+            <p class="text-red-600" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></p>
+        </div>
+
+        <div>
+            <label class="block font-semibold">Organisatie</label>
+            <input type="text" th:field="*{organization}" class="border p-2 w-full">
+        </div>
+
+        <div>
+            <label class="block font-semibold">Contact Email</label>
+            <input type="email" th:field="*{contactEmail}" class="border p-2 w-full">
+            <p class="text-red-600" th:if="${#fields.hasErrors('contactEmail')}" th:errors="*{contactEmail}"></p>
+        </div>
+
+        <div>
+            <label class="block font-semibold">Datum & Tijd</label>
+            <input type="datetime-local" th:field="*{dateTime}" class="border p-2 w-full">
+        </div>
+
+        <button class="bg-blue-600 text-white px-4 py-2 rounded">Opslaan</button>
+    </form>
+</div>
+
+<th:block th:replace="layout :: content"></th:block>
