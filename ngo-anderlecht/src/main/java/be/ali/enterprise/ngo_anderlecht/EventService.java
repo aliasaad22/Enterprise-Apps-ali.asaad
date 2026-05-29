@@ -11,14 +11,19 @@ import java.util.List;
 public class EventService {
 
     private final List<Event> events = new ArrayList<>();
+    private final List<Location> locations = new ArrayList<>();
     private long nextId = 1;
 
     public EventService() {
-      
+
+        // Locaties
         Location loc1 = new Location(1L, "Gemeenschapscentrum Anderlecht", "Kaai 16, 1070 Anderlecht", 120);
         Location loc2 = new Location(2L, "Buurtcentrum Zuid", "Zuidlaan 45, 1070 Anderlecht", 80);
 
-       
+        locations.add(loc1);
+        locations.add(loc2);
+
+        // Events
         Event e1 = new Event();
         e1.setId(nextId++);
         e1.setTitle("Voedselbedeling");
@@ -58,5 +63,9 @@ public class EventService {
     public void add(Event event) {
         event.setId(nextId++);
         events.add(event);
+    }
+
+    public List<Location> getAllLocations() {
+        return locations;
     }
 }

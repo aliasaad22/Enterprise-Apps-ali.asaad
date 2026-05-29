@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+
 @Controller
 @RequestMapping("/events")
 public class EventController {
@@ -25,18 +26,34 @@ public class EventController {
     @GetMapping("/new")
     public String newEventForm(Model model) {
         model.addAttribute("event", new Event());
+        model.addAttribute("locations", eventService.getAllLocations());
         return "events/new";
     }
 
     @PostMapping("/new")
     public String createEvent(@Valid @ModelAttribute("event") Event event,
-                              BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "events/new";
-        }
-        eventService.add(event);
-        return "redirect:/events";
+                          BindingResult bindingResult,
+                          @RequestParam("locationId") Long locationId,
+                          Model model) {
+
+    if (bindingResult.hasErrors()) {
+        model.addAttribute("locations", eventService.getAllLocations());
+        return "events/new";
     }
+
+    // locatie koppelen
+    Location loc = eventService.getAllLocations()
+            .stream()
+            .filter(l -> l.getId().equals(locationId))
+            .findFirst()
+            .orElse(null);
+
+    event.setLocation(loc);
+
+    eventService.add(event);
+    return "redirect:/events";
+}
+
 
     @GetMapping("/{id}")
     public String details(@PathVariable Long id, Model model) {
