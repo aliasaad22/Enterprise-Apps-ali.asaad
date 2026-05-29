@@ -2,9 +2,13 @@
     <h1 class="text-3xl font-bold mb-4" th:text="${event.title}"></h1>
 
     <div class="bg-white p-6 rounded shadow space-y-2">
-        <p><strong>Datum:</strong> <span th:text="${event.dateTime}"></span></p>
+        <p><strong>Datum:</strong>
+            <span th:text="${#temporals.format(event.dateTime, 'dd MMMM yyyy – HH:mm')}"></span>
+        </p>
+
         <p><strong>Organisatie:</strong> <span th:text="${event.organization}"></span></p>
         <p><strong>Email:</strong> <span th:text="${event.contactEmail}"></span></p>
+
         <p><strong>Beschrijving:</strong></p>
         <p th:text="${event.description}"></p>
     </div>

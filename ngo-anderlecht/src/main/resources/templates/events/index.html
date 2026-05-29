@@ -16,7 +16,7 @@
             <tbody>
                 <tr th:each="event : ${events}" class="border-b">
                     <td class="p-2" th:text="${event.title}"></td>
-                    <td class="p-2" th:text="${event.dateTime}"></td>
+                    <td class="p-2" th:text="${#temporals.format(event.dateTime, 'dd MMM yyyy – HH:mm')}"></td>
                     <td class="p-2" th:text="${event.organization}"></td>
                     <td class="p-2">
                         <a th:href="@{'/events/' + ${event.id}}" class="text-blue-600">Bekijk</a>
