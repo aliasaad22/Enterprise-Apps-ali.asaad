@@ -24,17 +24,23 @@ public class ContactController {
     }
 
     @PostMapping("/contact")
-    public String sendContact(
+    public String submitForm(
             @Valid @ModelAttribute("contactForm") ContactForm form,
-            BindingResult bindingResult,
+            BindingResult result,
             Model model) {
 
-        if (bindingResult.hasErrors()) {
+        if (result.hasErrors()) {
             return "contact";
         }
 
+        // Mail versturen
         mailService.sendContactMail(form);
-        model.addAttribute("success", true);
+
+        // Succesbericht tonen
+        model.addAttribute("success", "Je bericht is succesvol verzonden!");
+
+        // FORMULIER LEEGMAKEN NA VERSTUREN
+        model.addAttribute("contactForm", new ContactForm());
 
         return "contact";
     }
