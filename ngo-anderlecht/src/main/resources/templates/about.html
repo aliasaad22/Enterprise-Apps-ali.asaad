@@ -1,6 +1,44 @@
 <div th:fragment="content">
-    <h1 class="text-3xl font-bold mb-4">Over Ons</h1>
-    <p>NGO Anderlecht ondersteunt de lokale gemeenschap met evenementen en hulpinitiatieven.</p>
+    <h1 class="text-3xl font-bold mb-4">Over Onze NGO</h1>
+
+    <div class="bg-white p-6 rounded shadow space-y-4">
+
+        <!-- Adres -->
+        <div>
+            <h2 class="text-xl font-semibold">Adres</h2>
+            <p>
+                Campus Kaai<br>
+                Nijverheidskaai 170<br>
+                1070 Anderlecht
+            </p>
+        </div>
+
+        <!-- Contactgegevens -->
+        <div>
+            <h2 class="text-xl font-semibold">Contactgegevens</h2>
+            <p>
+                Telefoon: 02 123 45 67<br>
+                Email: info@anderlecht-ngo.be
+            </p>
+        </div>
+
+        <!-- Omschrijving -->
+        <div>
+            <h2 class="text-xl font-semibold">Omschrijving</h2>
+            <p>
+                Onze Anderlechtse NGO zet zich dagelijks in voor het versterken van de lokale gemeenschap.
+                We ondersteunen kwetsbare gezinnen, organiseren buurtactiviteiten en werken samen met
+                partnerorganisaties om solidariteit en welzijn te bevorderen.
+
+                <br><br>
+
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae sapien vel turpis
+                facilisis tincidunt. Integer id justo vel lorem fermentum varius. Donec non urna nec
+                sapien tincidunt tincidunt. Suspendisse potenti.
+            </p>
+        </div>
+
+    </div>
 </div>
 
 <th:block th:replace="layout :: content"></th:block>

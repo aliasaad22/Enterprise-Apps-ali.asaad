@@ -1,19 +1,57 @@
 <div th:fragment="content">
-    <h1 class="text-3xl font-bold mb-4" th:text="${event.title}"></h1>
+    <h1 class="text-3xl font-bold mb-4">Event Details</h1>
 
-    <div class="bg-white p-6 rounded shadow space-y-2">
-        <p><strong>Datum:</strong>
-            <span th:text="${#temporals.format(event.dateTime, 'dd MMMM yyyy – HH:mm')}"></span>
-        </p>
+    <div class="bg-white p-6 rounded shadow space-y-4">
 
-        <p><strong>Organisatie:</strong> <span th:text="${event.organization}"></span></p>
-        <p><strong>Email:</strong> <span th:text="${event.contactEmail}"></span></p>
+        <!-- Titel -->
+        <div>
+            <h2 class="text-xl font-semibold">Titel</h2>
+            <p th:text="${event.title}"></p>
+        </div>
 
-        <p><strong>Beschrijving:</strong></p>
-        <p th:text="${event.description}"></p>
+        <!-- Beschrijving -->
+        <div>
+            <h2 class="text-xl font-semibold">Beschrijving</h2>
+            <p th:text="${event.description}"></p>
+        </div>
+
+        <!-- Organisatie -->
+        <div>
+            <h2 class="text-xl font-semibold">Organisatie</h2>
+            <p th:text="${event.organization}"></p>
+        </div>
+
+        <!-- Contact Email -->
+        <div>
+            <h2 class="text-xl font-semibold">Contactpersoon Email</h2>
+            <p th:text="${event.contactEmail}"></p>
+        </div>
+
+        <!-- Datum & Tijd -->
+        <div>
+            <h2 class="text-xl font-semibold">Datum & Tijd</h2>
+            <p th:text="${#temporals.format(event.dateTime, 'dd/MM/yyyy HH:mm')}"></p>
+        </div>
+
+        <!-- Locatie -->
+        <div>
+            <h2 class="text-xl font-semibold">Locatie</h2>
+            <p>
+                <span th:text="${event.location.name}"></span><br>
+                <span th:text="${event.location.address}"></span><br>
+                Capaciteit: <span th:text="${event.location.capacity}"></span> personen
+            </p>
+        </div>
+
     </div>
 
-    <a href="/events" class="text-blue-600 mt-4 inline-block">Terug naar lijst</a>
+    <!-- Terug knop -->
+    <div class="mt-4">
+        <a href="/events"
+           class="bg-gray-600 text-white px-4 py-2 rounded inline-block">
+            Terug naar overzicht
+        </a>
+    </div>
 </div>
 
 <th:block th:replace="layout :: content"></th:block>
