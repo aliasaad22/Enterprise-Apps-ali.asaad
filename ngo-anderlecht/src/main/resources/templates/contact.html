@@ -1,6 +1,39 @@
 <div th:fragment="content">
-    <h1 class="text-3xl font-bold mb-4">Contact</h1>
-    <p>Neem contact op via: info@ngo-anderlecht.be</p>
+    <h1 class="text-3xl font-bold mb-4">Contacteer Ons</h1>
+
+    <div class="bg-white p-6 rounded shadow space-y-4">
+
+        <!-- Succesbericht -->
+        <div th:if="${success}" class="p-3 bg-green-200 text-green-800 rounded">
+            Je bericht is succesvol verzonden!
+        </div>
+
+        <form th:action="@{/contact}" th:object="${contactForm}" method="post" class="space-y-4">
+
+            <!-- Naam -->
+            <div>
+                <label class="block font-semibold">Naam *</label>
+                <input type="text" th:field="*{name}" class="border p-2 w-full">
+                <p class="text-red-600 text-sm" th:errors="*{name}"></p>
+            </div>
+
+            <!-- Email -->
+            <div>
+                <label class="block font-semibold">Email *</label>
+                <input type="email" th:field="*{email}" class="border p-2 w-full">
+                <p class="text-red-600 text-sm" th:errors="*{email}"></p>
+            </div>
+
+            <!-- Bericht -->
+            <div>
+                <label class="block font-semibold">Bericht *</label>
+                <textarea th:field="*{message}" class="border p-2 w-full"></textarea>
+                <p class="text-red-600 text-sm" th:errors="*{message}"></p>
+            </div>
+
+            <button class="bg-blue-600 text-white px-4 py-2 rounded">Verstuur</button>
+        </form>
+    </div>
 </div>
 
 <th:block th:replace="layout :: content"></th:block>
