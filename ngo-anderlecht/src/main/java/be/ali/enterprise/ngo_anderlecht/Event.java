@@ -26,7 +26,7 @@ public class Event {
     @NotBlank
     private String contactEmail;
 
-    @NotNull
+    // VERWIJDERD: @NotNull
     private Location location;
 
     public Event() {}

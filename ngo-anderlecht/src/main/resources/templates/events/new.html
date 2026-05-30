@@ -1,28 +1,35 @@
 <div th:fragment="content">
     <h1 class="text-3xl font-bold mb-4">Nieuw Event</h1>
 
-    <form th:action="@{/events/new}" th:object="${event}" method="post" class="bg-white p-6 rounded shadow space-y-4">
+    <form th:action="@{/events/new}" th:object="${event}" method="post"
+          class="bg-white p-6 rounded shadow space-y-4">
 
+        <!-- Titel -->
         <div>
             <label class="block font-semibold">Titel</label>
             <input type="text" th:field="*{title}" class="border p-2 w-full">
             <p class="text-red-600" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></p>
         </div>
 
+        <!-- Beschrijving -->
         <div>
             <label class="block font-semibold">Beschrijving</label>
             <textarea th:field="*{description}" class="border p-2 w-full"></textarea>
             <p class="text-red-600" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></p>
         </div>
 
+        <!-- Organisatie -->
         <div>
             <label class="block font-semibold">Organisatie</label>
             <input type="text" th:field="*{organization}" class="border p-2 w-full">
+            <p class="text-red-600" th:if="${#fields.hasErrors('organization')}" th:errors="*{organization}"></p>
         </div>
+
+        <!-- Locatie -->
         <div>
             <label class="block font-semibold">Locatie</label>
-            <select name="locationId" class="border p-2 w-full">
-                <option value="">-- Kies een locatie --</option>
+            <select name="locationId" class="border p-2 w-full" required>
+                <option value="" disabled selected>-- Kies een locatie --</option>
                 <option th:each="loc : ${locations}"
                         th:value="${loc.id}"
                         th:text="${loc.name + ' (' + loc.address + ')'}">
@@ -30,18 +37,21 @@
             </select>
         </div>
 
-
+        <!-- Contact Email -->
         <div>
             <label class="block font-semibold">Contact Email</label>
             <input type="email" th:field="*{contactEmail}" class="border p-2 w-full">
             <p class="text-red-600" th:if="${#fields.hasErrors('contactEmail')}" th:errors="*{contactEmail}"></p>
         </div>
 
+        <!-- Datum & Tijd -->
         <div>
             <label class="block font-semibold">Datum & Tijd</label>
             <input type="datetime-local" th:field="*{dateTime}" class="border p-2 w-full">
+            <p class="text-red-600" th:if="${#fields.hasErrors('dateTime')}" th:errors="*{dateTime}"></p>
         </div>
 
+        <!-- Opslaan -->
         <button class="bg-blue-600 text-white px-4 py-2 rounded">Opslaan</button>
     </form>
 </div>
