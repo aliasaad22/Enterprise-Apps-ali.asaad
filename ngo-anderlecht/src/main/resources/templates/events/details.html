@@ -6,82 +6,118 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-gray-100">
+<body class="bg-gray-100 min-h-screen flex flex-col">
 
+<!-- NAVBAR -->
 <div th:replace="fragments/navbar :: navbar"></div>
 
-<div class="container mx-auto mt-6">
+<!-- MAIN -->
+<main class="flex-grow">
+    <div class="max-w-4xl mx-auto px-4 py-8">
 
-    <h1 class="text-3xl font-bold mb-4">
-        Event Details
-    </h1>
-
-    <div class="bg-white p-6 rounded shadow space-y-4">
-
-        <div>
-            <h2 class="text-xl font-semibold">Titel</h2>
-            <p th:text="${event.title}"></p>
-        </div>
-
-        <div>
-            <h2 class="text-xl font-semibold">Beschrijving</h2>
-            <p th:text="${event.description}"></p>
-        </div>
-
-        <div>
-            <h2 class="text-xl font-semibold">Organisatie</h2>
-            <p th:text="${event.organization}"></p>
-        </div>
-
-        <div>
-            <h2 class="text-xl font-semibold">
-                Contactpersoon Email
-            </h2>
-
-            <p th:text="${event.contactEmail}"></p>
-        </div>
-
-        <div>
-            <h2 class="text-xl font-semibold">
-                Datum & Tijd
-            </h2>
-
-            <p th:text="${#temporals.format(event.dateTime, 'dd/MM/yyyy HH:mm')}"></p>
-        </div>
-
-        <div>
-            <h2 class="text-xl font-semibold">
-                Locatie
-            </h2>
-
-            <p>
-                <span th:text="${event.location.name}"></span>
-                <br>
-
-                <span th:text="${event.location.address}"></span>
-                <br>
-
-                Capaciteit:
-                <span th:text="${event.location.capacity}"></span>
-                personen
+        <!-- HEADER -->
+        <div class="mb-6">
+            <h1 class="text-3xl font-bold text-gray-800">
+                Event Details
+            </h1>
+            <p class="text-gray-500 mt-1">
+                Overzicht van alle informatie van dit event
             </p>
         </div>
 
+        <!-- CARD -->
+        <div class="bg-white rounded-lg shadow overflow-hidden">
+
+            <div class="p-6 space-y-6">
+
+                <!-- Titel -->
+                <div>
+                    <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">
+                        Titel
+                    </h2>
+                    <p class="text-lg font-medium text-gray-800"
+                       th:text="${event.title}">
+                    </p>
+                </div>
+
+                <!-- Beschrijving -->
+                <div>
+                    <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">
+                        Beschrijving
+                    </h2>
+                    <p class="text-gray-700"
+                       th:text="${event.description}">
+                    </p>
+                </div>
+
+                <!-- Organisatie -->
+                <div>
+                    <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">
+                        Organisatie
+                    </h2>
+                    <p class="text-gray-800 font-medium"
+                       th:text="${event.organization}">
+                    </p>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">
+                        Contactpersoon
+                    </h2>
+                    <p class="text-gray-700"
+                       th:text="${event.contactEmail}">
+                    </p>
+                </div>
+
+                <!-- Datum -->
+                <div>
+                    <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">
+                        Datum & Tijd
+                    </h2>
+                    <p class="text-gray-800 font-medium"
+                       th:text="${#temporals.format(event.dateTime, 'dd/MM/yyyy HH:mm')}">
+                    </p>
+                </div>
+
+                <!-- Locatie -->
+                <div>
+                    <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">
+                        Locatie
+                    </h2>
+
+                    <div class="text-gray-700 space-y-1">
+                        <p class="font-medium text-gray-800"
+                           th:text="${event.location.name}">
+                        </p>
+
+                        <p th:text="${event.location.address}"></p>
+
+                        <p class="text-sm text-gray-600">
+                            Capaciteit:
+                            <span class="font-semibold"
+                                  th:text="${event.location.capacity}"></span>
+                            personen
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- BACK BUTTON -->
+        <div class="mt-6">
+            <a href="/events"
+               class="inline-flex items-center bg-gray-700 text-white px-5 py-2.5 rounded-lg shadow hover:bg-gray-800 transition">
+                ← Terug naar overzicht
+            </a>
+        </div>
+
     </div>
+</main>
 
-    <div class="mt-4">
-
-        <a href="/events"
-           class="bg-gray-600 text-white px-4 py-2 rounded inline-block">
-
-            Terug naar overzicht
-
-        </a>
-
-    </div>
-
-</div>
-
+<!-- FOOTER -->
 <div th:replace="fragments/footer :: footer"></div>
 
 </body>

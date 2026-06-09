@@ -6,64 +6,111 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-gray-100">
+<body class="bg-gray-100 min-h-screen flex flex-col">
 
+<!-- NAVBAR -->
 <div th:replace="fragments/navbar :: navbar"></div>
 
-<div class="container mx-auto mt-6">
+<!-- MAIN -->
+<main class="flex-grow">
+    <div class="max-w-7xl mx-auto px-4 py-8">
 
-    <h1 class="text-3xl font-bold mb-4">
-        Laatste Events
-    </h1>
+        <!-- HEADER -->
+        <div class="mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-800">
+                NGO Anderlecht Events
+            </h1>
+            <p class="text-gray-600 mt-2">
+                Overzicht van de laatste gemeenschapsevenementen
+            </p>
+        </div>
 
-    <div class="bg-white p-4 rounded shadow">
+        <!-- STATS -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
 
-        <table class="w-full">
+            <div class="bg-white rounded-lg shadow p-5">
+                <p class="text-sm text-gray-500">Totaal events</p>
+                <p class="text-2xl font-bold text-gray-800"
+                   th:text="${#lists.size(events)}"></p>
+            </div>
 
-            <thead>
-                <tr class="border-b">
-                    <th class="text-left p-2">Titel</th>
-                    <th class="text-left p-2">Organisatie</th>
-                    <th class="text-left p-2">Details</th>
-                </tr>
-            </thead>
+            <div class="bg-white rounded-lg shadow p-5">
+                <p class="text-sm text-gray-500">Organisaties</p>
+                <p class="text-lg font-semibold text-gray-800">
+                    Gemeente + Partners
+                </p>
+            </div>
 
-            <tbody>
+            <div class="bg-white rounded-lg shadow p-5">
+                <p class="text-sm text-gray-500">Status</p>
+                <p class="text-green-600 font-semibold">
+                    Actief
+                </p>
+            </div>
 
-                <tr th:each="event : ${events}" class="border-b">
+        </div>
 
-                    <td class="p-2"
-                        th:text="${event.title}">
-                    </td>
+        <!-- TABLE CARD -->
+        <div class="bg-white rounded-lg shadow overflow-hidden">
 
-                    <td class="p-2"
-                        th:text="${event.organization}">
-                    </td>
+            <div class="px-6 py-4 border-b">
+                <h2 class="text-lg font-semibold text-gray-800">
+                    Event overzicht
+                </h2>
+            </div>
 
-                    <td class="p-2">
-                        <a th:href="@{'/events/' + ${event.id}}"
-                           class="text-blue-600 hover:underline">
-                            Bekijk
-                        </a>
-                    </td>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left">
 
-                </tr>
+                    <thead class="bg-gray-50 text-gray-600 text-sm">
+                    <tr>
+                        <th class="p-4">Titel</th>
+                        <th class="p-4">Organisatie</th>
+                        <th class="p-4">Actie</th>
+                    </tr>
+                    </thead>
 
-            </tbody>
+                    <tbody class="divide-y">
 
-        </table>
+                    <tr th:each="event : ${events}"
+                        class="hover:bg-gray-50 transition">
+
+                        <td class="p-4 font-medium text-gray-800"
+                            th:text="${event.title}">
+                        </td>
+
+                        <td class="p-4 text-gray-600"
+                            th:text="${event.organization}">
+                        </td>
+
+                        <td class="p-4">
+                            <a th:href="@{'/events/' + ${event.id}}"
+                               class="text-blue-600 hover:text-blue-800 font-medium transition">
+                                Details
+                            </a>
+                        </td>
+
+                    </tr>
+
+                    </tbody>
+
+                </table>
+            </div>
+
+        </div>
+
+        <!-- BUTTON -->
+        <div class="mt-6">
+            <a href="/events/new"
+               class="inline-flex items-center bg-blue-600 text-white px-5 py-3 rounded-lg shadow hover:bg-blue-700 transition">
+                + Nieuw Event
+            </a>
+        </div>
 
     </div>
+</main>
 
-    <div class="mt-4">
-        <a href="/events/new"
-           class="bg-blue-600 text-white px-4 py-2 rounded inline-block">
-            Nieuw Event
-        </a>
-    </div>
-
-</div>
-
+<!-- FOOTER -->
 <div th:replace="fragments/footer :: footer"></div>
 
 </body>

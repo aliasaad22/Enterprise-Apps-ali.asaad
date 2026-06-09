@@ -1,133 +1,152 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Nieuw Event</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-gray-100">
+<body class="bg-gray-100 min-h-screen flex flex-col">
 
+<!-- NAVBAR -->
 <div th:replace="fragments/navbar :: navbar"></div>
 
-<div class="container mx-auto mt-6">
+<!-- MAIN -->
+<main class="flex-grow">
+    <div class="max-w-3xl mx-auto px-4 py-8">
 
-    <h1 class="text-3xl font-bold mb-4">
-        Nieuw Event
-    </h1>
-     <p class="text-gray-600 mb-4">
-        Velden met * zijn verplicht
-    </p>
-
-    <form th:action="@{/events/new}"
-          th:object="${event}"
-          method="post"
-          class="bg-white p-6 rounded shadow space-y-4">
-
-        <div>
-            <label class="block font-semibold">
-                Titel *
-            </label>
-
-            <input type="text"
-                   th:field="*{title}"
-                   class="border p-2 w-full">
-
-            <p class="text-red-600 text-sm"
-               th:errors="*{title}">
+        <!-- HEADER -->
+        <div class="mb-6">
+            <h1 class="text-3xl font-bold text-gray-800">
+                Nieuw Event
+            </h1>
+            <p class="text-gray-500 mt-1">
+                Velden met * zijn verplicht
             </p>
         </div>
 
-        <div>
-            <label class="block font-semibold">
-                Beschrijving *
-            </label>
+        <!-- FORM CARD -->
+        <form th:action="@{/events/new}"
+              th:object="${event}"
+              method="post"
+              class="bg-white rounded-lg shadow p-6 space-y-6">
 
-            <textarea th:field="*{description}"
-                      class="border p-2 w-full">
-            </textarea>
+            <!-- Titel -->
+            <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-1">
+                    Titel *
+                </label>
+                <input type="text"
+                       th:field="*{title}"
+                       class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none">
 
-            <p class="text-red-600 text-sm"
-               th:errors="*{description}">
-            </p>
-        </div>
+                <p class="text-red-600 text-sm mt-1"
+                   th:errors="*{title}">
+                </p>
+            </div>
 
-        <div>
-            <label class="block font-semibold">
-                Organisatie *
-            </label>
+            <!-- Beschrijving -->
+            <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-1">
+                    Beschrijving *
+                </label>
+                <textarea th:field="*{description}"
+                          rows="4"
+                          class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"></textarea>
 
-            <input type="text"
-                   th:field="*{organization}"
-                   class="border p-2 w-full">
+                <p class="text-red-600 text-sm mt-1"
+                   th:errors="*{description}">
+                </p>
+            </div>
 
-            <p class="text-red-600 text-sm"
-               th:errors="*{organization}">
-            </p>
-        </div>
+            <!-- Organisatie -->
+            <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-1">
+                    Organisatie *
+                </label>
+                <input type="text"
+                       th:field="*{organization}"
+                       class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none">
 
-        <div>
-            <label class="block font-semibold">
-                Locatie *
-            </label>
+                <p class="text-red-600 text-sm mt-1"
+                   th:errors="*{organization}">
+                </p>
+            </div>
 
-            <select name="locationId"
-                    class="border p-2 w-full" required>
+            <!-- Locatie -->
+            <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-1">
+                    Locatie *
+                </label>
 
-                <option value="">
-                    -- Kies een locatie --
-                </option>
+                <select name="locationId"
+                        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                        required>
 
-                <option th:each="loc : ${locations}"
-                        th:value="${loc.id}"
-                        th:text="${loc.name + ' (' + loc.address + ')'}">
-                </option>
+                    <option value="">-- Kies een locatie --</option>
 
-            </select>
+                    <option th:each="loc : ${locations}"
+                            th:value="${loc.id}"
+                            th:text="${loc.name + ' (' + loc.address + ')'}">
+                    </option>
 
-            <p class="text-red-600 text-sm"
-               th:if="${locationError}"
-               th:text="${locationError}">
-            </p>
+                </select>
 
-        </div>
+                <p class="text-red-600 text-sm mt-1"
+                   th:if="${locationError}"
+                   th:text="${locationError}">
+                </p>
+            </div>
 
-        <div>
-            <label class="block font-semibold">
-                Contact Email *
-            </label>
+            <!-- Email -->
+            <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-1">
+                    Contact Email *
+                </label>
+                <input type="email"
+                       th:field="*{contactEmail}"
+                       class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none">
 
-            <input type="email"
-                   th:field="*{contactEmail}"
-                   class="border p-2 w-full">
+                <p class="text-red-600 text-sm mt-1"
+                   th:errors="*{contactEmail}">
+                </p>
+            </div>
 
-            <p class="text-red-600 text-sm"
-               th:errors="*{contactEmail}">
-            </p>
-        </div>
+            <!-- Datum -->
+            <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-1">
+                    Datum & Tijd *
+                </label>
+                <input type="datetime-local"
+                       th:field="*{dateTime}"
+                       class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none">
 
-        <div>
-            <label class="block font-semibold">
-                Datum & Tijd *
-            </label>
+                <p class="text-red-600 text-sm mt-1"
+                   th:errors="*{dateTime}">
+                </p>
+            </div>
 
-            <input type="datetime-local"
-                   th:field="*{dateTime}"
-                   class="border p-2 w-full">
+            <!-- BUTTONS -->
+            <div class="flex items-center justify-between pt-4">
 
-            <p class="text-red-600 text-sm"
-               th:errors="*{dateTime}">
-            </p>
-        </div>
+                <a href="/events"
+                   class="text-gray-600 hover:text-gray-800 transition">
+                    ← Annuleren
+                </a>
 
-        <button class="bg-blue-600 text-white px-4 py-2 rounded">
-            Opslaan
-        </button>
+                <button type="submit"
+                        class="bg-blue-600 text-white px-6 py-2.5 rounded-lg shadow hover:bg-blue-700 transition">
+                    Opslaan
+                </button>
 
-    </form>
+            </div>
 
-</div>
+        </form>
 
+    </div>
+</main>
+
+<!-- FOOTER -->
 <div th:replace="fragments/footer :: footer"></div>
 
 </body>
