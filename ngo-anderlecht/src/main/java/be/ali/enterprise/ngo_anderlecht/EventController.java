@@ -6,7 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-
 @Controller
 @RequestMapping("/events")
 public class EventController {
@@ -31,36 +30,47 @@ public class EventController {
     }
 
     @PostMapping("/new")
-    public String createEvent(@Valid @ModelAttribute("event") Event event,
-                          BindingResult bindingResult,
-                          @RequestParam("locationId") Long locationId,
-                          Model model) {
+    public String createEvent(
+            @Valid @ModelAttribute("event") Event event,
+            BindingResult bindingResult,
+            @RequestParam(value = "locationId", required = false) Long locationId,
+            Model model) {
 
-    if (bindingResult.hasErrors()) {
-        model.addAttribute("locations", eventService.getAllLocations());
-        return "events/new";
+       
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("locations", eventService.getAllLocations());
+            return "events/new";
+        }
+
+        
+        if (locationId == null) {
+            model.addAttribute("locations", eventService.getAllLocations());
+            model.addAttribute("locationError", "Locatie is verplicht");
+            return "events/new";
+        }
+
+        Location loc = eventService.getAllLocations()
+                .stream()
+                .filter(l -> l.getId().equals(locationId))
+                .findFirst()
+                .orElse(null);
+
+        event.setLocation(loc);
+
+    
+        eventService.add(event);
+
+        return "redirect:/events";
     }
-
-    // locatie koppelen
-    Location loc = eventService.getAllLocations()
-            .stream()
-            .filter(l -> l.getId().equals(locationId))
-            .findFirst()
-            .orElse(null);
-
-    event.setLocation(loc);
-
-    eventService.add(event);
-    return "redirect:/events";
-}
-
 
     @GetMapping("/{id}")
     public String details(@PathVariable Long id, Model model) {
         Event event = eventService.findById(id);
+
         if (event == null) {
             return "redirect:/events";
         }
+
         model.addAttribute("event", event);
         return "events/details";
     }
