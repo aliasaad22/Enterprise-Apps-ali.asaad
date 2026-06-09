@@ -1,44 +1,70 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Events</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
 
-<th:block th:replace="layout :: content">
+<body class="bg-gray-100">
 
-    <div>
-        <h1 class="text-3xl font-bold mb-4">Laatste Events</h1>
+<div th:replace="fragments/navbar :: navbar"></div>
 
-        <div class="bg-white p-4 rounded shadow">
-            <table class="w-full">
-                <thead>
-                    <tr class="border-b">
-                        <th class="text-left p-2">Titel</th>
-                        <th class="text-left p-2">Organisatie</th>
-                        <th class="text-left p-2">Details</th>
-                    </tr>
-                </thead>
+<div class="container mx-auto mt-6">
 
-                <tbody>
-                    <tr th:each="event : ${events}" class="border-b">
-                        <td class="p-2" th:text="${event.title}"></td>
-                        <td class="p-2" th:text="${event.organization}"></td>
-                        <td class="p-2">
-                            <a th:href="@{'/events/' + ${event.id}}"
-                               class="text-blue-600 hover:underline">
-                                Bekijk
-                            </a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+    <h1 class="text-3xl font-bold mb-4">
+        Laatste Events
+    </h1>
 
-        <div class="mt-4">
-            <a href="/events/new"
-               class="bg-blue-600 text-white px-4 py-2 rounded inline-block">
-                Nieuw Event
-            </a>
-        </div>
+    <div class="bg-white p-4 rounded shadow">
+
+        <table class="w-full">
+
+            <thead>
+                <tr class="border-b">
+                    <th class="text-left p-2">Titel</th>
+                    <th class="text-left p-2">Organisatie</th>
+                    <th class="text-left p-2">Details</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr th:each="event : ${events}" class="border-b">
+
+                    <td class="p-2"
+                        th:text="${event.title}">
+                    </td>
+
+                    <td class="p-2"
+                        th:text="${event.organization}">
+                    </td>
+
+                    <td class="p-2">
+                        <a th:href="@{'/events/' + ${event.id}}"
+                           class="text-blue-600 hover:underline">
+                            Bekijk
+                        </a>
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
     </div>
 
-</th:block>
+    <div class="mt-4">
+        <a href="/events/new"
+           class="bg-blue-600 text-white px-4 py-2 rounded inline-block">
+            Nieuw Event
+        </a>
+    </div>
 
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
 </html>

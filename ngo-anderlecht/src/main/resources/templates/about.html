@@ -1,45 +1,55 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>About</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
 
-<th:block th:replace="layout :: content">
+<body class="bg-gray-100">
 
-    <div>
-        <h1 class="text-3xl font-bold mb-4">Over Onze NGO</h1>
+<div th:replace="fragments/navbar :: navbar"></div>
 
-        <div class="bg-white p-6 rounded shadow space-y-4">
+<div class="container mx-auto mt-6">
 
-            <div>
-                <h2 class="text-xl font-semibold">Adres</h2>
-                <p>
-                    Campus Kaai<br>
-                    Nijverheidskaai 170<br>
-                    1070 Anderlecht
-                </p>
-            </div>
+    <h1 class="text-3xl font-bold mb-4">Over Onze NGO</h1>
 
-            <div>
-                <h2 class="text-xl font-semibold">Contactgegevens</h2>
-                <p>
-                    Telefoon: 02 123 45 67<br>
-                    Email: info@anderlecht-ngo.be
-                </p>
-            </div>
+    <div class="bg-white p-6 rounded shadow space-y-4">
 
-            <div>
-                <h2 class="text-xl font-semibold">Omschrijving</h2>
-                <p>
-                    Onze Anderlechtse NGO zet zich dagelijks in voor het versterken van de lokale gemeenschap.
-                    We ondersteunen kwetsbare gezinnen, organiseren buurtactiviteiten en werken samen met
-                    partnerorganisaties om solidariteit en welzijn te bevorderen.
-                    <br><br>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae sapien vel turpis
-                    facilisis tincidunt. Integer id justo vel lorem fermentum varius.
-                </p>
-            </div>
-
+        <div>
+            <h2 class="text-xl font-semibold">Adres</h2>
+            <p>
+                Campus Kaai<br>
+                Nijverheidskaai 170<br>
+                1070 Anderlecht
+            </p>
         </div>
+
+        <div>
+            <h2 class="text-xl font-semibold">Contactgegevens</h2>
+            <p>
+                Telefoon: 02 123 45 67<br>
+                Email: info@anderlecht-ngo.be
+            </p>
+        </div>
+
+        <div>
+            <h2 class="text-xl font-semibold">Omschrijving</h2>
+            <p>
+                Onze Anderlechtse NGO zet zich dagelijks in voor het versterken van de lokale gemeenschap.
+                We ondersteunen kwetsbare gezinnen en organiseren buurtactiviteiten.
+
+                <br><br>
+
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            </p>
+        </div>
+
     </div>
 
-</th:block>
+</div>
 
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
 </html>

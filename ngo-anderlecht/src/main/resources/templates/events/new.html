@@ -1,59 +1,131 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Nieuw Event</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
 
-<th:block th:replace="layout :: content">
+<body class="bg-gray-100">
 
-    <div>
-        <h1 class="text-3xl font-bold mb-4">Nieuw Event</h1>
+<div th:replace="fragments/navbar :: navbar"></div>
 
-        <form th:action="@{/events/new}" th:object="${event}" method="post"
-              class="bg-white p-6 rounded shadow space-y-4">
+<div class="container mx-auto mt-6">
 
-            <div>
-                <label class="block font-semibold">Titel *</label>
-                <input type="text" th:field="*{title}" class="border p-2 w-full">
-                <p class="text-red-600 text-sm" th:errors="*{title}"></p>
-            </div>
+    <h1 class="text-3xl font-bold mb-4">
+        Nieuw Event
+    </h1>
 
-            <div>
-                <label class="block font-semibold">Beschrijving *</label>
-                <textarea th:field="*{description}" class="border p-2 w-full"></textarea>
-                <p class="text-red-600 text-sm" th:errors="*{description}"></p>
-            </div>
+    <form th:action="@{/events/new}"
+          th:object="${event}"
+          method="post"
+          class="bg-white p-6 rounded shadow space-y-4">
 
-            <div>
-                <label class="block font-semibold">Organisatie *</label>
-                <input type="text" th:field="*{organization}" class="border p-2 w-full">
-                <p class="text-red-600 text-sm" th:errors="*{organization}"></p>
-            </div>
+        <div>
+            <label class="block font-semibold">
+                Titel *
+            </label>
 
-            <div>
-                <label class="block font-semibold">Locatie *</label>
-                <select name="locationId" class="border p-2 w-full" required>
-                    <option value="" disabled selected>-- Kies een locatie --</option>
-                    <option th:each="loc : ${locations}"
-                            th:value="${loc.id}"
-                            th:text="${loc.name + ' (' + loc.address + ')'}">
-                    </option>
-                </select>
-            </div>
+            <input type="text"
+                   th:field="*{title}"
+                   class="border p-2 w-full">
 
-            <div>
-                <label class="block font-semibold">Contact Email *</label>
-                <input type="email" th:field="*{contactEmail}" class="border p-2 w-full">
-                <p class="text-red-600 text-sm" th:errors="*{contactEmail}"></p>
-            </div>
+            <p class="text-red-600 text-sm"
+               th:errors="*{title}">
+            </p>
+        </div>
 
-            <div>
-                <label class="block font-semibold">Datum & Tijd *</label>
-                <input type="datetime-local" th:field="*{dateTime}" class="border p-2 w-full">
-                <p class="text-red-600 text-sm" th:errors="*{dateTime}"></p>
-            </div>
+        <div>
+            <label class="block font-semibold">
+                Beschrijving *
+            </label>
 
-            <button class="bg-blue-600 text-white px-4 py-2 rounded">Opslaan</button>
-        </form>
-    </div>
+            <textarea th:field="*{description}"
+                      class="border p-2 w-full">
+            </textarea>
 
-</th:block>
+            <p class="text-red-600 text-sm"
+               th:errors="*{description}">
+            </p>
+        </div>
 
+        <div>
+            <label class="block font-semibold">
+                Organisatie *
+            </label>
+
+            <input type="text"
+                   th:field="*{organization}"
+                   class="border p-2 w-full">
+
+            <p class="text-red-600 text-sm"
+               th:errors="*{organization}">
+            </p>
+        </div>
+
+        <div>
+            <label class="block font-semibold">
+                Locatie *
+            </label>
+
+            <select name="locationId"
+                    class="border p-2 w-full">
+
+                <option value="">
+                    -- Kies een locatie --
+                </option>
+
+                <option th:each="loc : ${locations}"
+                        th:value="${loc.id}"
+                        th:text="${loc.name + ' (' + loc.address + ')'}">
+                </option>
+
+            </select>
+
+            <p class="text-red-600 text-sm"
+               th:if="${locationError}"
+               th:text="${locationError}">
+            </p>
+
+        </div>
+
+        <div>
+            <label class="block font-semibold">
+                Contact Email *
+            </label>
+
+            <input type="email"
+                   th:field="*{contactEmail}"
+                   class="border p-2 w-full">
+
+            <p class="text-red-600 text-sm"
+               th:errors="*{contactEmail}">
+            </p>
+        </div>
+
+        <div>
+            <label class="block font-semibold">
+                Datum & Tijd *
+            </label>
+
+            <input type="datetime-local"
+                   th:field="*{dateTime}"
+                   class="border p-2 w-full">
+
+            <p class="text-red-600 text-sm"
+               th:errors="*{dateTime}">
+            </p>
+        </div>
+
+        <button class="bg-blue-600 text-white px-4 py-2 rounded">
+            Opslaan
+        </button>
+
+    </form>
+
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
 </html>

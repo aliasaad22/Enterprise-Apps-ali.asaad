@@ -1,42 +1,68 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
 
-<th:block th:replace="layout :: content">
+<body class="bg-gray-100">
 
-    <div>
-        <h1 class="text-3xl font-bold mb-4">Contacteer Ons</h1>
+<div th:replace="fragments/navbar :: navbar"></div>
 
-        <div class="bg-white p-6 rounded shadow space-y-4">
+<div class="container mx-auto mt-6">
 
-            <div th:if="${success}" class="p-3 bg-green-200 text-green-800 rounded">
-                Je bericht is succesvol verzonden!
+    <h1 class="text-3xl font-bold mb-4">Contacteer Ons</h1>
+
+    <div class="bg-white p-6 rounded shadow">
+
+        <div th:if="${success}"
+             class="p-3 bg-green-200 text-green-800 rounded mb-4">
+            Je bericht is succesvol verzonden!
+        </div>
+
+        <form th:action="@{/contact}"
+              th:object="${contactForm}"
+              method="post"
+              class="space-y-4">
+
+            <div>
+                <label class="block font-semibold">Naam *</label>
+                <input type="text"
+                       th:field="*{name}"
+                       class="border p-2 w-full">
+                <p class="text-red-600"
+                   th:errors="*{name}"></p>
             </div>
 
-            <form th:action="@{/contact}" th:object="${contactForm}" method="post" class="space-y-4">
+            <div>
+                <label class="block font-semibold">Email *</label>
+                <input type="email"
+                       th:field="*{email}"
+                       class="border p-2 w-full">
+                <p class="text-red-600"
+                   th:errors="*{email}"></p>
+            </div>
 
-                <div>
-                    <label class="block font-semibold">Naam *</label>
-                    <input type="text" th:field="*{name}" class="border p-2 w-full">
-                    <p class="text-red-600 text-sm" th:errors="*{name}"></p>
-                </div>
+            <div>
+                <label class="block font-semibold">Bericht *</label>
+                <textarea th:field="*{message}"
+                          class="border p-2 w-full"></textarea>
+                <p class="text-red-600"
+                   th:errors="*{message}"></p>
+            </div>
 
-                <div>
-                    <label class="block font-semibold">Email *</label>
-                    <input type="email" th:field="*{email}" class="border p-2 w-full">
-                    <p class="text-red-600 text-sm" th:errors="*{email}"></p>
-                </div>
+            <button class="bg-blue-600 text-white px-4 py-2 rounded">
+                Verstuur
+            </button>
 
-                <div>
-                    <label class="block font-semibold">Bericht *</label>
-                    <textarea th:field="*{message}" class="border p-2 w-full"></textarea>
-                    <p class="text-red-600 text-sm" th:errors="*{message}"></p>
-                </div>
+        </form>
 
-                <button class="bg-blue-600 text-white px-4 py-2 rounded">Verstuur</button>
-            </form>
-        </div>
     </div>
 
-</th:block>
+</div>
 
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
 </html>

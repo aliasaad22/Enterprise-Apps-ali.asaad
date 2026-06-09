@@ -19,9 +19,13 @@
 </nav>
 
 <div class="container mx-auto mt-6">
-    <!-- DIT is het fragment dat Thymeleaf zoekt -->
-    <div th:fragment="content"></div>
+    <!-- Hier komt de content van elke pagina -->
+    <th:block th:replace="${content}"></th:block>
 </div>
+
+<footer class="text-center text-gray-600 mt-10 py-4">
+    © 2024 NGO Anderlecht
+</footer>
 
 </body>
 </html>
