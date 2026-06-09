@@ -1,38 +1,44 @@
-<div th:fragment="content">
-    <h1 class="text-3xl font-bold mb-4">Laatste Events</h1>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 
-    <div class="bg-white p-4 rounded shadow">
-        <table class="w-full">
-            <thead>
-                <tr class="border-b">
-                    <th class="text-left p-2">Titel</th>
-                    <th class="text-left p-2">Organisatie</th>
-                    <th class="text-left p-2">Details</th>
-                </tr>
-            </thead>
+<th:block th:replace="layout :: content">
 
-            <tbody>
-                <tr th:each="event : ${events}" class="border-b">
-                    <td class="p-2" th:text="${event.title}"></td>
-                    <td class="p-2" th:text="${event.organization}"></td>
-                    <td class="p-2">
-                        <a th:href="@{'/events/' + ${event.id}}"
-                           class="text-blue-600 hover:underline">
-                            Bekijk
-                        </a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    <div>
+        <h1 class="text-3xl font-bold mb-4">Laatste Events</h1>
+
+        <div class="bg-white p-4 rounded shadow">
+            <table class="w-full">
+                <thead>
+                    <tr class="border-b">
+                        <th class="text-left p-2">Titel</th>
+                        <th class="text-left p-2">Organisatie</th>
+                        <th class="text-left p-2">Details</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr th:each="event : ${events}" class="border-b">
+                        <td class="p-2" th:text="${event.title}"></td>
+                        <td class="p-2" th:text="${event.organization}"></td>
+                        <td class="p-2">
+                            <a th:href="@{'/events/' + ${event.id}}"
+                               class="text-blue-600 hover:underline">
+                                Bekijk
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="mt-4">
+            <a href="/events/new"
+               class="bg-blue-600 text-white px-4 py-2 rounded inline-block">
+                Nieuw Event
+            </a>
+        </div>
     </div>
 
-    <!-- Nieuw Event knop -->
-    <div class="mt-4">
-        <a href="/events/new"
-           class="bg-blue-600 text-white px-4 py-2 rounded inline-block">
-            Nieuw Event
-        </a>
-    </div>
-</div>
+</th:block>
 
-<th:block th:replace="layout :: content"></th:block>
+</html>
